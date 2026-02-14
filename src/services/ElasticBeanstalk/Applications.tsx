@@ -32,12 +32,12 @@ export default function Applications() {
   function handleDelete() { selected.forEach((a) => removeApplication(a.ApplicationName)); setSelected([]); setShowDelete(false); }
 
   return (
-    <div>
+    <div data-mission="elasticbeanstalk-apps-list">
       <ResourceTable columns={columns} data={applications as unknown as Record<string, unknown>[]} keyField="ApplicationName" title="Applications"
         onSelectionChange={(items) => setSelected(items as unknown as EBApplication[])}
         actions={<div style={{ display: 'flex', gap: '8px' }}>
           <button className="aws-btn aws-btn-danger aws-btn-sm" disabled={selected.length === 0} onClick={() => setShowDelete(true)}>Delete</button>
-          <button className="aws-btn aws-btn-primary aws-btn-sm" onClick={() => setShowCreate(true)}>Create application</button>
+          <button className="aws-btn aws-btn-primary aws-btn-sm" data-mission="elasticbeanstalk-create-btn" onClick={() => setShowCreate(true)}>Create application</button>
         </div>}
       />
       <ConfirmDialog isOpen={showDelete} title="Delete applications" message={`Delete ${selected.length} application(s)?`} confirmLabel="Delete" onConfirm={handleDelete} onCancel={() => setShowDelete(false)} danger />

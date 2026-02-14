@@ -35,12 +35,12 @@ export default function ElastiCacheClusters() {
   function handleDelete() { selected.forEach((c) => removeCluster(c.CacheClusterId)); setSelected([]); setShowDelete(false); }
 
   return (
-    <div>
+    <div data-mission="elasticache-clusters-list">
       <ResourceTable columns={columns} data={clusters as unknown as Record<string, unknown>[]} keyField="CacheClusterId" title="Clusters"
         onSelectionChange={(items) => setSelected(items as unknown as ElastiCacheCluster[])}
         actions={<div style={{ display: 'flex', gap: '8px' }}>
           <button className="aws-btn aws-btn-danger aws-btn-sm" disabled={selected.length === 0} onClick={() => setShowDelete(true)}>Delete</button>
-          <button className="aws-btn aws-btn-primary aws-btn-sm" onClick={() => setShowCreate(true)}>Create cluster</button>
+          <button className="aws-btn aws-btn-primary aws-btn-sm" data-mission="elasticache-create-btn" onClick={() => setShowCreate(true)}>Create cluster</button>
         </div>}
       />
       <ConfirmDialog isOpen={showDelete} title="Delete clusters" message={`Delete ${selected.length} cluster(s)?`} confirmLabel="Delete" onConfirm={handleDelete} onCancel={() => setShowDelete(false)} danger />

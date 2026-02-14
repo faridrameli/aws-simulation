@@ -14,6 +14,14 @@ import {
   useSQSStore,
   useRoute53Store,
   useSecretsManagerStore,
+  useCloudFormationStore,
+  useECSStore,
+  useEKSStore,
+  useAPIGatewayStore,
+  useCloudFrontStore,
+  useElasticBeanstalkStore,
+  useCodePipelineStore,
+  useElastiCacheStore,
 } from '../../store';
 import { MISSIONS } from '../../data/missions';
 
@@ -39,29 +47,47 @@ export default function useMissionValidator() {
   const sqsCount = useSQSStore((s) => s.queues.length);
   const route53Count = useRoute53Store((s) => s.hostedZones.length);
   const secretsCount = useSecretsManagerStore((s) => s.secrets.length);
+  const cfnCount = useCloudFormationStore((s) => s.stacks.length);
+  const ecsCount = useECSStore((s) => s.clusters.length);
+  const eksCount = useEKSStore((s) => s.clusters.length);
+  const apigwCount = useAPIGatewayStore((s) => s.apis.length);
+  const cloudfrontCount = useCloudFrontStore((s) => s.distributions.length);
+  const ebCount = useElasticBeanstalkStore((s) => s.applications.length);
+  const cpCount = useCodePipelineStore((s) => s.pipelines.length);
+  const ecacheCount = useElastiCacheStore((s) => s.clusters.length);
 
-  // Derive current mission/step directly (no getState())
+  // Derive current mission/step directly
   const mission = activeMissionId ? MISSIONS.find((m) => m.id === activeMissionId) : null;
   const step = mission ? mission.steps[currentStepIndex] : null;
 
-  // Prevent double-advancing in React strict mode
   const advancingRef = useRef(false);
 
   function getStoreCount(storeKey: string, property: string): number {
-    if (storeKey === 'ec2' && property === 'instances') return ec2Count;
-    if (storeKey === 's3' && property === 'buckets') return s3Count;
-    if (storeKey === 'iam' && property === 'users') return iamCount;
-    if (storeKey === 'vpc' && property === 'vpcs') return vpcCount;
-    if (storeKey === 'vpc' && property === 'subnets') return subnetCount;
-    if (storeKey === 'lambda' && property === 'functions') return lambdaCount;
-    if (storeKey === 'rds' && property === 'instances') return rdsCount;
-    if (storeKey === 'dynamodb' && property === 'tables') return dynamoCount;
-    if (storeKey === 'cloudwatch' && property === 'alarms') return cwAlarmCount;
-    if (storeKey === 'sns' && property === 'topics') return snsCount;
-    if (storeKey === 'sqs' && property === 'queues') return sqsCount;
-    if (storeKey === 'route53' && property === 'hostedZones') return route53Count;
-    if (storeKey === 'secretsmanager' && property === 'secrets') return secretsCount;
-    return 0;
+    const key = `${storeKey}.${property}`;
+    const map: Record<string, number> = {
+      'ec2.instances': ec2Count,
+      's3.buckets': s3Count,
+      'iam.users': iamCount,
+      'vpc.vpcs': vpcCount,
+      'vpc.subnets': subnetCount,
+      'lambda.functions': lambdaCount,
+      'rds.instances': rdsCount,
+      'dynamodb.tables': dynamoCount,
+      'cloudwatch.alarms': cwAlarmCount,
+      'sns.topics': snsCount,
+      'sqs.queues': sqsCount,
+      'route53.hostedZones': route53Count,
+      'secretsmanager.secrets': secretsCount,
+      'cloudformation.stacks': cfnCount,
+      'ecs.clusters': ecsCount,
+      'eks.clusters': eksCount,
+      'apigateway.apis': apigwCount,
+      'cloudfront.distributions': cloudfrontCount,
+      'elasticbeanstalk.applications': ebCount,
+      'codepipeline.pipelines': cpCount,
+      'elasticache.clusters': ecacheCount,
+    };
+    return map[key] ?? 0;
   }
 
   // Snapshot counts when entering a storeCheck step
@@ -102,5 +128,5 @@ export default function useMissionValidator() {
       advanceStep();
       setTimeout(() => { advancingRef.current = false; }, 50);
     }
-  }, [ec2Count, s3Count, iamCount, vpcCount, subnetCount, lambdaCount, rdsCount, dynamoCount, cwAlarmCount, snsCount, sqsCount, route53Count, secretsCount, activeMissionId, currentStepIndex, stepStartCounts, step, advanceStep]);
+  }, [ec2Count, s3Count, iamCount, vpcCount, subnetCount, lambdaCount, rdsCount, dynamoCount, cwAlarmCount, snsCount, sqsCount, route53Count, secretsCount, cfnCount, ecsCount, eksCount, apigwCount, cloudfrontCount, ebCount, cpCount, ecacheCount, activeMissionId, currentStepIndex, stepStartCounts, step, advanceStep]);
 }

@@ -39,12 +39,12 @@ export default function Stacks() {
   function handleDelete() { selected.forEach((s) => removeStack(s.StackId)); setSelected([]); setShowDelete(false); }
 
   return (
-    <div>
+    <div data-mission="cloudformation-stacks-list">
       <ResourceTable columns={columns} data={stacks as unknown as Record<string, unknown>[]} keyField="StackId" title="Stacks"
         onSelectionChange={(items) => setSelected(items as unknown as CFStack[])}
         actions={<div style={{ display: 'flex', gap: '8px' }}>
           <button className="aws-btn aws-btn-danger aws-btn-sm" disabled={selected.length === 0} onClick={() => setShowDelete(true)}>Delete</button>
-          <button className="aws-btn aws-btn-primary aws-btn-sm" onClick={() => setShowCreate(true)}>Create stack</button>
+          <button className="aws-btn aws-btn-primary aws-btn-sm" data-mission="cloudformation-create-btn" onClick={() => setShowCreate(true)}>Create stack</button>
         </div>}
       />
       <ConfirmDialog isOpen={showDelete} title="Delete stacks" message={`Delete ${selected.length} stack(s)?`} confirmLabel="Delete" onConfirm={handleDelete} onCancel={() => setShowDelete(false)} danger />

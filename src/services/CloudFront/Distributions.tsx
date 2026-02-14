@@ -35,12 +35,12 @@ export default function Distributions() {
   function handleDelete() { selected.forEach((d) => removeDistribution(d.DistributionId)); setSelected([]); setShowDelete(false); }
 
   return (
-    <div>
+    <div data-mission="cloudfront-distributions-list">
       <ResourceTable columns={columns} data={distributions as unknown as Record<string, unknown>[]} keyField="DistributionId" title="Distributions"
         onSelectionChange={(items) => setSelected(items as unknown as CFDistribution[])}
         actions={<div style={{ display: 'flex', gap: '8px' }}>
           <button className="aws-btn aws-btn-danger aws-btn-sm" disabled={selected.length === 0} onClick={() => setShowDelete(true)}>Delete</button>
-          <button className="aws-btn aws-btn-primary aws-btn-sm" onClick={() => setShowCreate(true)}>Create distribution</button>
+          <button className="aws-btn aws-btn-primary aws-btn-sm" data-mission="cloudfront-create-btn" onClick={() => setShowCreate(true)}>Create distribution</button>
         </div>}
       />
       <ConfirmDialog isOpen={showDelete} title="Delete distributions" message={`Delete ${selected.length} distribution(s)?`} confirmLabel="Delete" onConfirm={handleDelete} onCancel={() => setShowDelete(false)} danger />

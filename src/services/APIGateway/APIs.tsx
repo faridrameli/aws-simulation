@@ -35,12 +35,12 @@ export default function APIs() {
   function handleDelete() { selected.forEach((a) => removeAPI(a.ApiId)); setSelected([]); setShowDelete(false); }
 
   return (
-    <div>
+    <div data-mission="apigateway-apis-list">
       <ResourceTable columns={columns} data={apis as unknown as Record<string, unknown>[]} keyField="ApiId" title="APIs"
         onSelectionChange={(items) => setSelected(items as unknown as APIGatewayAPI[])}
         actions={<div style={{ display: 'flex', gap: '8px' }}>
           <button className="aws-btn aws-btn-danger aws-btn-sm" disabled={selected.length === 0} onClick={() => setShowDelete(true)}>Delete</button>
-          <button className="aws-btn aws-btn-primary aws-btn-sm" onClick={() => setShowCreate(true)}>Create API</button>
+          <button className="aws-btn aws-btn-primary aws-btn-sm" data-mission="apigateway-create-btn" onClick={() => setShowCreate(true)}>Create API</button>
         </div>}
       />
       <ConfirmDialog isOpen={showDelete} title="Delete APIs" message={`Delete ${selected.length} API(s)?`} confirmLabel="Delete" onConfirm={handleDelete} onCancel={() => setShowDelete(false)} danger />
