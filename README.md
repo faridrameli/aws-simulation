@@ -1,73 +1,66 @@
-# React + TypeScript + Vite
+# AWS Management Console Simulation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A browser-based simulation of the AWS Management Console built for learning purposes. Explore and interact with 20 AWS services without needing an AWS account or incurring any costs.
 
-Currently, two official plugins are available:
+## What is this?
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project replicates the look and feel of the real AWS Console. You can create, view, and manage simulated AWS resources to understand how each service works before using the real thing. All data is stored locally in your browser via localStorage.
 
-## React Compiler
+## Simulated Services
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Compute**
+- EC2 (Elastic Compute Cloud) - Launch instances, manage security groups, key pairs, elastic IPs
+- Lambda - Create and manage serverless functions
+- Elastic Beanstalk - Deploy and manage web applications
 
-## Expanding the ESLint configuration
+**Storage**
+- S3 (Simple Storage Service) - Create buckets and manage objects
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Database**
+- RDS (Relational Database Service) - Create and manage relational databases
+- DynamoDB - Create and manage NoSQL tables
+- ElastiCache - Create Redis and Memcached clusters
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+**Networking & Content Delivery**
+- VPC (Virtual Private Cloud) - Manage VPCs, subnets, route tables, gateways
+- Route 53 - Manage DNS hosted zones and records
+- CloudFront - Create CDN distributions
+- API Gateway - Build REST, HTTP, and WebSocket APIs
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+**Security, Identity & Compliance**
+- IAM (Identity and Access Management) - Manage users, groups, roles, and policies
+- Secrets Manager - Store and manage secrets
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**Management & Governance**
+- CloudWatch - Create alarms, log groups, and dashboards
+- CloudFormation - Manage infrastructure as code stacks
+
+**Application Integration**
+- SNS (Simple Notification Service) - Create topics and subscriptions
+- SQS (Simple Queue Service) - Create standard and FIFO queues
+
+**Containers**
+- ECS (Elastic Container Service) - Manage clusters and task definitions
+- EKS (Elastic Kubernetes Service) - Manage Kubernetes clusters
+
+**Developer Tools**
+- CodePipeline - Create CI/CD pipelines
+
+## Getting Started
+
+```bash
+# Install dependencies
+yarn
+
+# Start the development server
+yarn start
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open http://localhost:5173 in your browser.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Tech Stack
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- React 19 + TypeScript
+- Vite
+- React Router
+- Zustand (state management with localStorage persistence)

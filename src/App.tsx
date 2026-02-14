@@ -48,21 +48,64 @@ import RouteTables from './services/VPC/RouteTables';
 import InternetGateways from './services/VPC/InternetGateways';
 import NATGateways from './services/VPC/NATGateways';
 
-// Remaining services
+// DynamoDB
 import DynamoDBDashboard from './services/DynamoDB/DynamoDBDashboard';
+import DynamoDBTables from './services/DynamoDB/Tables';
+
+// CloudWatch
 import CloudWatchDashboard from './services/CloudWatch/CloudWatchDashboard';
+import CWAlarms from './services/CloudWatch/Alarms';
+import CWLogGroups from './services/CloudWatch/LogGroups';
+import CWDashboards from './services/CloudWatch/Dashboards';
+
+// Route 53
 import Route53Dashboard from './services/Route53/Route53Dashboard';
+import HostedZones from './services/Route53/HostedZones';
+
+// CloudFormation
 import CloudFormationDashboard from './services/CloudFormation/CloudFormationDashboard';
+import CFStacks from './services/CloudFormation/Stacks';
+
+// SNS
 import SNSDashboard from './services/SNS/SNSDashboard';
+import SNSTopics from './services/SNS/Topics';
+
+// SQS
 import SQSDashboard from './services/SQS/SQSDashboard';
+import SQSQueues from './services/SQS/Queues';
+
+// ECS
 import ECSDashboard from './services/ECS/ECSDashboard';
+import ECSClusters from './services/ECS/Clusters';
+import ECSTaskDefinitions from './services/ECS/TaskDefinitions';
+
+// EKS
 import EKSDashboard from './services/EKS/EKSDashboard';
+import EKSClusters from './services/EKS/EKSClusters';
+
+// API Gateway
 import APIGatewayDashboard from './services/APIGateway/APIGatewayDashboard';
+import APIGatewayAPIs from './services/APIGateway/APIs';
+
+// Elastic Beanstalk
 import ElasticBeanstalkDashboard from './services/ElasticBeanstalk/ElasticBeanstalkDashboard';
+import EBApplications from './services/ElasticBeanstalk/Applications';
+
+// CodePipeline
 import CodePipelineDashboard from './services/CodePipeline/CodePipelineDashboard';
+import CPPipelines from './services/CodePipeline/Pipelines';
+
+// Secrets Manager
 import SecretsManagerDashboard from './services/SecretsManager/SecretsManagerDashboard';
+import SMSecrets from './services/SecretsManager/Secrets';
+
+// CloudFront
 import CloudFrontDashboard from './services/CloudFront/CloudFrontDashboard';
+import CFDistributions from './services/CloudFront/Distributions';
+
+// ElastiCache
 import ElastiCacheDashboard from './services/ElastiCache/ElastiCacheDashboard';
+import ElastiCacheClusters from './services/ElastiCache/ElastiCacheClusters';
 
 // Nav configurations
 const ec2Nav: NavSection[] = [
@@ -350,71 +393,88 @@ export default function App() {
         {/* DynamoDB */}
         <Route path="/dynamodb" element={<ServiceLayout serviceName="DynamoDB" sections={dynamoNav} />}>
           <Route index element={<DynamoDBDashboard />} />
+          <Route path="tables" element={<DynamoDBTables />} />
         </Route>
 
         {/* CloudWatch */}
         <Route path="/cloudwatch" element={<ServiceLayout serviceName="CloudWatch" sections={cloudwatchNav} />}>
           <Route index element={<CloudWatchDashboard />} />
+          <Route path="alarms" element={<CWAlarms />} />
+          <Route path="log-groups" element={<CWLogGroups />} />
+          <Route path="dashboards" element={<CWDashboards />} />
         </Route>
 
         {/* Route 53 */}
         <Route path="/route53" element={<ServiceLayout serviceName="Route 53" sections={route53Nav} />}>
           <Route index element={<Route53Dashboard />} />
+          <Route path="hosted-zones" element={<HostedZones />} />
         </Route>
 
         {/* CloudFormation */}
         <Route path="/cloudformation" element={<ServiceLayout serviceName="CloudFormation" sections={cfnNav} />}>
           <Route index element={<CloudFormationDashboard />} />
+          <Route path="stacks" element={<CFStacks />} />
         </Route>
 
         {/* SNS */}
         <Route path="/sns" element={<ServiceLayout serviceName="SNS" sections={snsNav} />}>
           <Route index element={<SNSDashboard />} />
+          <Route path="topics" element={<SNSTopics />} />
         </Route>
 
         {/* SQS */}
         <Route path="/sqs" element={<ServiceLayout serviceName="SQS" sections={sqsNav} />}>
           <Route index element={<SQSDashboard />} />
+          <Route path="queues" element={<SQSQueues />} />
         </Route>
 
         {/* ECS */}
         <Route path="/ecs" element={<ServiceLayout serviceName="ECS" sections={ecsNav} />}>
           <Route index element={<ECSDashboard />} />
+          <Route path="clusters" element={<ECSClusters />} />
+          <Route path="task-definitions" element={<ECSTaskDefinitions />} />
         </Route>
 
         {/* EKS */}
         <Route path="/eks" element={<ServiceLayout serviceName="EKS" sections={eksNav} />}>
           <Route index element={<EKSDashboard />} />
+          <Route path="clusters" element={<EKSClusters />} />
         </Route>
 
         {/* API Gateway */}
         <Route path="/apigateway" element={<ServiceLayout serviceName="API Gateway" sections={apiGwNav} />}>
           <Route index element={<APIGatewayDashboard />} />
+          <Route path="apis" element={<APIGatewayAPIs />} />
         </Route>
 
         {/* Elastic Beanstalk */}
         <Route path="/elasticbeanstalk" element={<ServiceLayout serviceName="Elastic Beanstalk" sections={ebNav} />}>
           <Route index element={<ElasticBeanstalkDashboard />} />
+          <Route path="applications" element={<EBApplications />} />
         </Route>
 
         {/* CodePipeline */}
         <Route path="/codepipeline" element={<ServiceLayout serviceName="CodePipeline" sections={cpNav} />}>
           <Route index element={<CodePipelineDashboard />} />
+          <Route path="pipelines" element={<CPPipelines />} />
         </Route>
 
         {/* Secrets Manager */}
         <Route path="/secretsmanager" element={<ServiceLayout serviceName="Secrets Manager" sections={smNav} />}>
           <Route index element={<SecretsManagerDashboard />} />
+          <Route path="secrets" element={<SMSecrets />} />
         </Route>
 
         {/* CloudFront */}
         <Route path="/cloudfront" element={<ServiceLayout serviceName="CloudFront" sections={cfNav} />}>
           <Route index element={<CloudFrontDashboard />} />
+          <Route path="distributions" element={<CFDistributions />} />
         </Route>
 
         {/* ElastiCache */}
         <Route path="/elasticache" element={<ServiceLayout serviceName="ElastiCache" sections={ecacheNav} />}>
           <Route index element={<ElastiCacheDashboard />} />
+          <Route path="clusters" element={<ElastiCacheClusters />} />
         </Route>
       </Routes>
     </BrowserRouter>
