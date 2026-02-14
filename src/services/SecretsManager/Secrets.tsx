@@ -35,12 +35,12 @@ export default function Secrets() {
   function handleDelete() { selected.forEach((s) => removeSecret(s.SecretId)); setSelected([]); setShowDelete(false); }
 
   return (
-    <div>
+    <div data-mission="secretsmanager-secrets-list">
       <ResourceTable columns={columns} data={secrets as unknown as Record<string, unknown>[]} keyField="SecretId" title="Secrets"
         onSelectionChange={(items) => setSelected(items as unknown as Secret[])}
         actions={<div style={{ display: 'flex', gap: '8px' }}>
           <button className="aws-btn aws-btn-danger aws-btn-sm" disabled={selected.length === 0} onClick={() => setShowDelete(true)}>Delete</button>
-          <button className="aws-btn aws-btn-primary aws-btn-sm" onClick={() => setShowCreate(true)}>Store a new secret</button>
+          <button className="aws-btn aws-btn-primary aws-btn-sm" data-mission="secretsmanager-create-btn" onClick={() => setShowCreate(true)}>Store a new secret</button>
         </div>}
       />
       <ConfirmDialog isOpen={showDelete} title="Delete secrets" message={`Delete ${selected.length} secret(s)?`} confirmLabel="Delete" onConfirm={handleDelete} onCancel={() => setShowDelete(false)} danger />

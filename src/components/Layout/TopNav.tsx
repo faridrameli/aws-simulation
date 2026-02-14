@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { SERVICE_CATALOG, SERVICE_CATEGORIES, AWS_REGIONS } from '../../utils/constants';
-import { useGlobalStore } from '../../store';
+import { useGlobalStore, useMissionStore } from '../../store';
+import { MISSIONS } from '../../data/missions';
 
 export default function TopNav() {
   const [showServices, setShowServices] = useState(false);
@@ -143,6 +144,7 @@ export default function TopNav() {
       </div>
 
       <div style={styles.right}>
+        <MissionsButton />
         <div ref={regionRef} style={styles.menuContainer}>
           <button
             style={styles.navBtn}
@@ -280,3 +282,16 @@ const styles: Record<string, React.CSSProperties> = {
   accountInfo: { padding: '4px 8px' },
   accountName: { color: '#ccc', fontSize: '12px' },
 };
+
+function MissionsButton() {
+  const togglePanel = useMissionStore((s) => s.togglePanel);
+  const completedMissionIds = useMissionStore((s) => s.completedMissionIds);
+  const remaining = MISSIONS.length - completedMissionIds.length;
+
+  return (
+    <button className="mission-nav-btn" onClick={togglePanel}>
+      Missions
+      {remaining > 0 && <span className="mission-nav-badge">{remaining}</span>}
+    </button>
+  );
+}

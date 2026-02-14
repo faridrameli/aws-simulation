@@ -24,7 +24,12 @@ export default function ConsoleDashboard() {
               <h3 style={styles.categoryTitle}>{category}</h3>
               <div style={styles.serviceGrid}>
                 {services.map((service) => (
-                  <Link key={service.path} to={service.path} style={styles.serviceCard}>
+                  <Link
+                    key={service.path}
+                    to={service.path}
+                    style={styles.serviceCard}
+                    data-mission={`service-${service.name.toLowerCase().replace(/\s+/g, '')}`}
+                  >
                     <div style={styles.serviceIcon}>
                       {service.name.charAt(0)}
                     </div>

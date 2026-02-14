@@ -41,7 +41,7 @@ export default function Functions() {
   }
 
   return (
-    <div>
+    <div data-mission="lambda-functions-table">
       <ResourceTable
         columns={columns}
         data={functions as unknown as Record<string, unknown>[]}
@@ -58,7 +58,7 @@ export default function Functions() {
             >
               Delete
             </button>
-            <Link to="/lambda/functions/create" className="aws-btn aws-btn-primary aws-btn-sm">
+            <Link to="/lambda/functions/create" className="aws-btn aws-btn-primary aws-btn-sm" data-mission="lambda-create-btn">
               Create function
             </Link>
           </div>

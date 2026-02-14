@@ -34,6 +34,7 @@ export default function ServiceLayout({ serviceName, sections }: ServiceLayoutPr
                   ...(isActive ? styles.navLinkActive : {}),
                 })}
                 end={item.path.split('/').length <= 2}
+                data-mission={`${item.path.split('/')[1]}-${item.label.toLowerCase().replace(/\s+/g, '-')}-link`}
               >
                 {item.label}
               </NavLink>

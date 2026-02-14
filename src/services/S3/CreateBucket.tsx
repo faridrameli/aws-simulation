@@ -38,7 +38,7 @@ export default function CreateBucket() {
     <div>
       <h1 style={{ fontSize: '22px', marginBottom: '20px' }}>Create bucket</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} data-mission="s3-create-form">
         <div className="aws-panel">
           <div className="aws-panel-header"><h2>General configuration</h2></div>
           <div className="aws-panel-body">

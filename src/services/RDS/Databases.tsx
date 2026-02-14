@@ -51,7 +51,7 @@ export default function Databases() {
   }
 
   return (
-    <div>
+    <div data-mission="rds-databases-table">
       <ResourceTable
         columns={columns}
         data={instances as unknown as Record<string, unknown>[]}
@@ -68,7 +68,7 @@ export default function Databases() {
             >
               Delete
             </button>
-            <Link to="/rds/databases/create" className="aws-btn aws-btn-primary aws-btn-sm">
+            <Link to="/rds/databases/create" className="aws-btn aws-btn-primary aws-btn-sm" data-mission="rds-create-btn">
               Create database
             </Link>
           </div>

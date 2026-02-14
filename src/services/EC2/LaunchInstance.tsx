@@ -56,7 +56,7 @@ export default function LaunchInstance() {
     <div>
       <h1 style={{ fontSize: '22px', marginBottom: '20px' }}>Launch an instance</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} data-mission="ec2-launch-form">
         <div className="aws-panel">
           <div className="aws-panel-header"><h2>Name and tags</h2></div>
           <div className="aws-panel-body">

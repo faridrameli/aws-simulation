@@ -4,6 +4,13 @@ import ServiceLayout from './components/Layout/ServiceLayout';
 import type { NavSection } from './components/Layout/ServiceLayout';
 import ConsoleDashboard from './pages/ConsoleDashboard';
 
+// Tutorial
+import MissionPanel from './components/Tutorial/MissionPanel';
+import MissionOverlay from './components/Tutorial/MissionOverlay';
+import StepPopover from './components/Tutorial/StepPopover';
+import MissionToast from './components/Tutorial/MissionToast';
+import useMissionValidator from './components/Tutorial/useMissionValidator';
+
 // EC2
 import EC2Dashboard from './services/EC2/EC2Dashboard';
 import Instances from './services/EC2/Instances';
@@ -327,10 +334,16 @@ const ecacheNav: NavSection[] = [
   },
 ];
 
-export default function App() {
+function AppContent() {
+  useMissionValidator();
+
   return (
-    <BrowserRouter>
+    <>
       <TopNav />
+      <MissionPanel />
+      <MissionOverlay />
+      <StepPopover />
+      <MissionToast />
       <Routes>
         <Route path="/" element={<ConsoleDashboard />} />
 
@@ -477,6 +490,14 @@ export default function App() {
           <Route path="clusters" element={<ElastiCacheClusters />} />
         </Route>
       </Routes>
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 }

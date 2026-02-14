@@ -65,7 +65,7 @@ export default function Buckets() {
             >
               Delete
             </button>
-            <Link to="/s3/buckets/create" className="aws-btn aws-btn-primary aws-btn-sm">
+            <Link to="/s3/buckets/create" className="aws-btn aws-btn-primary aws-btn-sm" data-mission="s3-create-btn">
               Create bucket
             </Link>
           </div>

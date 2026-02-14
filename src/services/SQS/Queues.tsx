@@ -40,12 +40,12 @@ export default function Queues() {
   function handleDelete() { selected.forEach((q) => removeQueue(q.QueueUrl)); setSelected([]); setShowDelete(false); }
 
   return (
-    <div>
+    <div data-mission="sqs-queues-list">
       <ResourceTable columns={columns} data={queues as unknown as Record<string, unknown>[]} keyField="QueueUrl" title="Queues"
         onSelectionChange={(items) => setSelected(items as unknown as SQSQueue[])}
         actions={<div style={{ display: 'flex', gap: '8px' }}>
           <button className="aws-btn aws-btn-danger aws-btn-sm" disabled={selected.length === 0} onClick={() => setShowDelete(true)}>Delete</button>
-          <button className="aws-btn aws-btn-primary aws-btn-sm" onClick={() => setShowCreate(true)}>Create queue</button>
+          <button className="aws-btn aws-btn-primary aws-btn-sm" data-mission="sqs-create-btn" onClick={() => setShowCreate(true)}>Create queue</button>
         </div>}
       />
       <ConfirmDialog isOpen={showDelete} title="Delete queues" message={`Delete ${selected.length} queue(s)?`} confirmLabel="Delete" onConfirm={handleDelete} onCancel={() => setShowDelete(false)} danger />

@@ -41,12 +41,12 @@ export default function Alarms() {
   function handleDelete() { selected.forEach((a) => removeAlarm(a.AlarmName)); setSelected([]); setShowDelete(false); }
 
   return (
-    <div>
+    <div data-mission="cloudwatch-alarms-list">
       <ResourceTable columns={columns} data={alarms as unknown as Record<string, unknown>[]} keyField="AlarmName" title="Alarms"
         onSelectionChange={(items) => setSelected(items as unknown as CloudWatchAlarm[])}
         actions={<div style={{ display: 'flex', gap: '8px' }}>
           <button className="aws-btn aws-btn-danger aws-btn-sm" disabled={selected.length === 0} onClick={() => setShowDelete(true)}>Delete</button>
-          <button className="aws-btn aws-btn-primary aws-btn-sm" onClick={() => setShowCreate(true)}>Create alarm</button>
+          <button className="aws-btn aws-btn-primary aws-btn-sm" data-mission="cloudwatch-create-alarm-btn" onClick={() => setShowCreate(true)}>Create alarm</button>
         </div>}
       />
       <ConfirmDialog isOpen={showDelete} title="Delete alarms" message={`Delete ${selected.length} alarm(s)?`} confirmLabel="Delete" onConfirm={handleDelete} onCancel={() => setShowDelete(false)} danger />

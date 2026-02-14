@@ -58,7 +58,7 @@ export default function Instances() {
   }
 
   return (
-    <div>
+    <div data-mission="ec2-instances-table">
       <ResourceTable
         columns={columns}
         data={instances as unknown as Record<string, unknown>[]}
@@ -89,7 +89,7 @@ export default function Instances() {
             >
               Terminate
             </button>
-            <Link to="/ec2/instances/launch" className="aws-btn aws-btn-primary aws-btn-sm">
+            <Link to="/ec2/instances/launch" className="aws-btn aws-btn-primary aws-btn-sm" data-mission="ec2-launch-btn">
               Launch instance
             </Link>
           </div>

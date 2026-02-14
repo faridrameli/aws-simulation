@@ -12,7 +12,7 @@ export default function VPCDashboard() {
     <div>
       <h1 style={{ fontSize: '22px', marginBottom: '20px' }}>VPC Dashboard</h1>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+      <div data-mission="vpc-dashboard-cards" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '16px', marginBottom: '24px' }}>
         <DashCard title="VPCs" value={vpcs.length} link="/vpc/vpcs" />
         <DashCard title="Subnets" value={subnets.length} link="/vpc/subnets" />
         <DashCard title="Route Tables" value={routeTables.length} link="/vpc/route-tables" />

@@ -71,7 +71,7 @@ export default function Users() {
   }
 
   return (
-    <div>
+    <div data-mission="iam-users-table">
       <ResourceTable
         columns={columns}
         data={users as unknown as Record<string, unknown>[]}
@@ -88,7 +88,7 @@ export default function Users() {
             >
               Delete
             </button>
-            <button className="aws-btn aws-btn-primary aws-btn-sm" onClick={() => setShowCreate(true)}>
+            <button className="aws-btn aws-btn-primary aws-btn-sm" onClick={() => setShowCreate(true)} data-mission="iam-create-user-btn">
               Create user
             </button>
           </div>

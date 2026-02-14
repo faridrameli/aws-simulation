@@ -41,12 +41,12 @@ export default function HostedZones() {
   function handleDelete() { selected.forEach((z) => removeHostedZone(z.Id)); setSelected([]); setShowDelete(false); }
 
   return (
-    <div>
+    <div data-mission="route53-zones-list">
       <ResourceTable columns={columns} data={hostedZones as unknown as Record<string, unknown>[]} keyField="Id" title="Hosted zones"
         onSelectionChange={(items) => setSelected(items as unknown as HostedZone[])}
         actions={<div style={{ display: 'flex', gap: '8px' }}>
           <button className="aws-btn aws-btn-danger aws-btn-sm" disabled={selected.length === 0} onClick={() => setShowDelete(true)}>Delete</button>
-          <button className="aws-btn aws-btn-primary aws-btn-sm" onClick={() => setShowCreate(true)}>Create hosted zone</button>
+          <button className="aws-btn aws-btn-primary aws-btn-sm" data-mission="route53-create-btn" onClick={() => setShowCreate(true)}>Create hosted zone</button>
         </div>}
       />
       <ConfirmDialog isOpen={showDelete} title="Delete hosted zones" message={`Delete ${selected.length} hosted zone(s)?`} confirmLabel="Delete" onConfirm={handleDelete} onCancel={() => setShowDelete(false)} danger />

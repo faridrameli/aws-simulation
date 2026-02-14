@@ -83,7 +83,7 @@ export default function CreateDatabase() {
     <div>
       <h1 style={{ fontSize: '22px', marginBottom: '20px' }}>Create database</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} data-mission="rds-create-form">
         <div className="aws-panel">
           <div className="aws-panel-header"><h2>Engine options</h2></div>
           <div className="aws-panel-body">

@@ -108,6 +108,7 @@ export default function VPCs() {
             <button
               className="aws-btn aws-btn-primary aws-btn-sm"
               onClick={() => setShowCreate(true)}
+              data-mission="vpc-create-btn"
             >
               Create VPC
             </button>

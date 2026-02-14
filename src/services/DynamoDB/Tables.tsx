@@ -56,7 +56,7 @@ export default function Tables() {
   }
 
   return (
-    <div>
+    <div data-mission="dynamodb-tables-list">
       <ResourceTable
         columns={columns}
         data={tables as unknown as Record<string, unknown>[]}
@@ -66,7 +66,7 @@ export default function Tables() {
         actions={
           <div style={{ display: 'flex', gap: '8px' }}>
             <button className="aws-btn aws-btn-danger aws-btn-sm" disabled={selected.length === 0} onClick={() => setShowDelete(true)}>Delete</button>
-            <button className="aws-btn aws-btn-primary aws-btn-sm" onClick={() => setShowCreate(true)}>Create table</button>
+            <button className="aws-btn aws-btn-primary aws-btn-sm" data-mission="dynamodb-create-btn" onClick={() => setShowCreate(true)}>Create table</button>
           </div>
         }
       />

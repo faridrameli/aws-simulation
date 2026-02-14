@@ -32,12 +32,12 @@ export default function Topics() {
   function handleDelete() { selected.forEach((t) => removeTopic(t.TopicArn)); setSelected([]); setShowDelete(false); }
 
   return (
-    <div>
+    <div data-mission="sns-topics-list">
       <ResourceTable columns={columns} data={topics as unknown as Record<string, unknown>[]} keyField="TopicArn" title="Topics"
         onSelectionChange={(items) => setSelected(items as unknown as SNSTopic[])}
         actions={<div style={{ display: 'flex', gap: '8px' }}>
           <button className="aws-btn aws-btn-danger aws-btn-sm" disabled={selected.length === 0} onClick={() => setShowDelete(true)}>Delete</button>
-          <button className="aws-btn aws-btn-primary aws-btn-sm" onClick={() => setShowCreate(true)}>Create topic</button>
+          <button className="aws-btn aws-btn-primary aws-btn-sm" data-mission="sns-create-btn" onClick={() => setShowCreate(true)}>Create topic</button>
         </div>}
       />
       <ConfirmDialog isOpen={showDelete} title="Delete topics" message={`Delete ${selected.length} topic(s)?`} confirmLabel="Delete" onConfirm={handleDelete} onCancel={() => setShowDelete(false)} danger />
