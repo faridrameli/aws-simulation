@@ -1,0 +1,119 @@
+:root {
+  /* AWS Core Colors */
+  --aws-squid-ink: #232f3e;
+  --aws-dark-blue: #1b2a3b;
+  --aws-orange: #ff9900;
+  --aws-orange-hover: #ec7211;
+  --aws-orange-dark: #eb5f07;
+  --aws-smile: #ff9900;
+  --aws-light-bg: #f2f3f3;
+  --aws-white: #ffffff;
+  --aws-border: #d5dbdb;
+  --aws-border-dark: #aab7b8;
+  --aws-text-primary: #16191f;
+  --aws-text-secondary: #545b64;
+  --aws-text-light: #687078;
+  --aws-text-link: #0073bb;
+  --aws-text-link-hover: #0062a3;
+  --aws-error: #d13212;
+  --aws-error-bg: #fdf3f1;
+  --aws-success: #1d8102;
+  --aws-success-bg: #f2f8f0;
+  --aws-warning: #ff9900;
+  --aws-warning-bg: #fef8f0;
+  --aws-info: #0073bb;
+  --aws-info-bg: #f1f8ff;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+
+  /* Typography */
+  --font-family: 'Amazon Ember', 'Helvetica Neue', Roboto, Arial, sans-serif;
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-xxl: 22px;
+  --font-size-heading: 24px;
+
+  /* Borders & Radius */
+  --border-radius: 2px;
+  --border-radius-lg: 4px;
+  --border-width: 1px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  /* Layout */
+  --topnav-height: 40px;
+  --sidebar-width: 220px;
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--aws-text-primary);
+  background: var(--aws-light-bg);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--aws-text-link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--aws-text-link-hover);
+  text-decoration: underline;
+}
+
+button {
+  font-family: var(--font-family);
+  cursor: pointer;
+}
+
+input, select, textarea {
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+h1 { font-size: var(--font-size-heading); }
+h2 { font-size: var(--font-size-xxl); }
+h3 { font-size: var(--font-size-xl); }

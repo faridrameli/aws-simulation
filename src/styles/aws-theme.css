@@ -1,0 +1,415 @@
+/* AWS Button Styles */
+.aws-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 16px;
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  border-radius: var(--border-radius);
+  border: var(--border-width) solid transparent;
+  cursor: pointer;
+  transition: background-color 0.15s;
+  min-height: 32px;
+  gap: 6px;
+}
+
+.aws-btn-primary {
+  background: var(--aws-orange);
+  color: var(--aws-squid-ink);
+  border-color: var(--aws-orange-dark);
+}
+
+.aws-btn-primary:hover {
+  background: var(--aws-orange-hover);
+}
+
+.aws-btn-secondary {
+  background: var(--aws-white);
+  color: var(--aws-text-primary);
+  border-color: var(--aws-border-dark);
+}
+
+.aws-btn-secondary:hover {
+  background: #fafafa;
+  border-color: var(--aws-text-secondary);
+}
+
+.aws-btn-danger {
+  background: var(--aws-error);
+  color: white;
+  border-color: #b7280f;
+}
+
+.aws-btn-danger:hover {
+  background: #b7280f;
+}
+
+.aws-btn-link {
+  background: none;
+  border: none;
+  color: var(--aws-text-link);
+  padding: 4px 8px;
+  font-weight: 400;
+}
+
+.aws-btn-link:hover {
+  color: var(--aws-text-link-hover);
+  text-decoration: underline;
+}
+
+.aws-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.aws-btn-sm {
+  padding: 2px 12px;
+  font-size: var(--font-size-sm);
+  min-height: 28px;
+}
+
+/* Card / Panel */
+.aws-panel {
+  background: var(--aws-white);
+  border: var(--border-width) solid var(--aws-border);
+  border-radius: var(--border-radius-lg);
+  margin-bottom: var(--space-md);
+}
+
+.aws-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: var(--border-width) solid var(--aws-border);
+}
+
+.aws-panel-header h2 {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+
+.aws-panel-body {
+  padding: var(--space-lg);
+}
+
+/* Form styles */
+.aws-form-group {
+  margin-bottom: var(--space-md);
+}
+
+.aws-form-label {
+  display: block;
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  margin-bottom: var(--space-xs);
+  color: var(--aws-text-primary);
+}
+
+.aws-form-label .required {
+  color: var(--aws-error);
+}
+
+.aws-form-hint {
+  font-size: var(--font-size-sm);
+  color: var(--aws-text-light);
+  margin-top: 2px;
+}
+
+.aws-form-input {
+  width: 100%;
+  padding: 6px 10px;
+  font-size: var(--font-size-md);
+  border: var(--border-width) solid var(--aws-border-dark);
+  border-radius: var(--border-radius);
+  background: var(--aws-white);
+  color: var(--aws-text-primary);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.aws-form-input:focus {
+  border-color: var(--aws-info);
+  box-shadow: 0 0 0 1px var(--aws-info);
+}
+
+.aws-form-input:disabled {
+  background: var(--aws-light-bg);
+  cursor: not-allowed;
+}
+
+.aws-form-select {
+  width: 100%;
+  padding: 6px 10px;
+  font-size: var(--font-size-md);
+  border: var(--border-width) solid var(--aws-border-dark);
+  border-radius: var(--border-radius);
+  background: var(--aws-white);
+  color: var(--aws-text-primary);
+  outline: none;
+  cursor: pointer;
+}
+
+.aws-form-select:focus {
+  border-color: var(--aws-info);
+  box-shadow: 0 0 0 1px var(--aws-info);
+}
+
+/* Breadcrumb */
+.aws-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) 0;
+  font-size: var(--font-size-sm);
+  color: var(--aws-text-secondary);
+}
+
+.aws-breadcrumb a {
+  color: var(--aws-text-link);
+  text-decoration: none;
+}
+
+.aws-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.aws-breadcrumb-separator {
+  color: var(--aws-text-light);
+  margin: 0 2px;
+}
+
+/* Status badges */
+.aws-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}
+
+.aws-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.aws-status-running .aws-status-dot,
+.aws-status-available .aws-status-dot,
+.aws-status-active .aws-status-dot,
+.aws-status-healthy .aws-status-dot,
+.aws-status-enabled .aws-status-dot,
+.aws-status-create-complete .aws-status-dot {
+  background: var(--aws-success);
+}
+
+.aws-status-running,
+.aws-status-available,
+.aws-status-active,
+.aws-status-healthy,
+.aws-status-enabled,
+.aws-status-create-complete {
+  color: var(--aws-success);
+}
+
+.aws-status-stopped .aws-status-dot,
+.aws-status-inactive .aws-status-dot,
+.aws-status-disabled .aws-status-dot {
+  background: var(--aws-text-light);
+}
+
+.aws-status-stopped,
+.aws-status-inactive,
+.aws-status-disabled {
+  color: var(--aws-text-light);
+}
+
+.aws-status-pending .aws-status-dot,
+.aws-status-creating .aws-status-dot,
+.aws-status-updating .aws-status-dot,
+.aws-status-in-progress .aws-status-dot {
+  background: var(--aws-warning);
+}
+
+.aws-status-pending,
+.aws-status-creating,
+.aws-status-updating,
+.aws-status-in-progress {
+  color: var(--aws-warning);
+}
+
+.aws-status-error .aws-status-dot,
+.aws-status-failed .aws-status-dot,
+.aws-status-terminated .aws-status-dot,
+.aws-status-delete-failed .aws-status-dot {
+  background: var(--aws-error);
+}
+
+.aws-status-error,
+.aws-status-failed,
+.aws-status-terminated,
+.aws-status-delete-failed {
+  color: var(--aws-error);
+}
+
+/* Tabs */
+.aws-tabs {
+  display: flex;
+  border-bottom: var(--border-width) solid var(--aws-border);
+  margin-bottom: var(--space-md);
+}
+
+.aws-tab {
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--aws-text-secondary);
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.aws-tab:hover {
+  color: var(--aws-text-primary);
+}
+
+.aws-tab-active {
+  color: var(--aws-text-primary);
+  border-bottom-color: var(--aws-info);
+}
+
+/* Alerts / Flash messages */
+.aws-alert {
+  padding: var(--space-md);
+  border-radius: var(--border-radius);
+  border: var(--border-width) solid;
+  margin-bottom: var(--space-md);
+  font-size: var(--font-size-md);
+}
+
+.aws-alert-info {
+  background: var(--aws-info-bg);
+  border-color: var(--aws-info);
+  color: var(--aws-text-primary);
+}
+
+.aws-alert-success {
+  background: var(--aws-success-bg);
+  border-color: var(--aws-success);
+  color: var(--aws-text-primary);
+}
+
+.aws-alert-warning {
+  background: var(--aws-warning-bg);
+  border-color: var(--aws-warning);
+  color: var(--aws-text-primary);
+}
+
+.aws-alert-error {
+  background: var(--aws-error-bg);
+  border-color: var(--aws-error);
+  color: var(--aws-text-primary);
+}
+
+/* Tags */
+.aws-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: var(--font-size-xs);
+  background: #e9ebed;
+  border: 1px solid var(--aws-border);
+  border-radius: var(--border-radius);
+  color: var(--aws-text-primary);
+}
+
+.aws-tag-remove {
+  background: none;
+  border: none;
+  color: var(--aws-text-light);
+  cursor: pointer;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* Empty state */
+.aws-empty-state {
+  text-align: center;
+  padding: var(--space-xxl);
+  color: var(--aws-text-secondary);
+}
+
+.aws-empty-state h3 {
+  margin-bottom: var(--space-sm);
+  color: var(--aws-text-primary);
+}
+
+/* Modal overlay */
+.aws-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 80px;
+  z-index: 1000;
+}
+
+.aws-modal {
+  background: var(--aws-white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 90%;
+  max-width: 700px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.aws-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: var(--border-width) solid var(--aws-border);
+}
+
+.aws-modal-header h2 {
+  font-size: var(--font-size-xl);
+}
+
+.aws-modal-body {
+  padding: var(--space-lg);
+}
+
+.aws-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  border-top: var(--border-width) solid var(--aws-border);
+}
+
+/* Key-value display */
+.aws-kv-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--space-sm) var(--space-lg);
+  font-size: var(--font-size-md);
+}
+
+.aws-kv-label {
+  color: var(--aws-text-secondary);
+  font-weight: 700;
+}
+
+.aws-kv-value {
+  color: var(--aws-text-primary);
+  word-break: break-all;
+}
