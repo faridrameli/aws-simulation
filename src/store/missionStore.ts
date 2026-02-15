@@ -37,6 +37,7 @@ export const useMissionStore = create<MissionState>()(
         activeMissionId: missionId,
         currentStepIndex: 0,
         showPanel: false,
+        stepStartCounts: {},
       }),
 
       advanceStep: () => {

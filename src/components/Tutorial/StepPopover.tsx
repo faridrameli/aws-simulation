@@ -18,6 +18,11 @@ export default function StepPopover() {
       setPosition(null);
       return;
     }
+    // Hide popover when a modal is open (user clicked the button, now filling a form)
+    if (document.querySelector('.aws-modal-overlay')) {
+      setPosition(null);
+      return;
+    }
     const el = document.querySelector(step.targetSelector);
     if (!el) {
       setPosition(null);

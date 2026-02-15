@@ -1,7 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import { useMissionStore } from '../../store';
 import { MISSIONS } from '../../data/missions';
 
 export default function MissionPanel() {
+  const navigate = useNavigate();
   const showPanel = useMissionStore((s) => s.showPanel);
   const closePanel = useMissionStore((s) => s.closePanel);
   const activeMissionId = useMissionStore((s) => s.activeMissionId);
@@ -40,6 +42,7 @@ export default function MissionPanel() {
                   if (!isActive && !isCompleted) {
                     startMission(mission.id);
                     closePanel();
+                    navigate('/');
                   }
                 }}
               >

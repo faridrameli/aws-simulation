@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useMissionStore } from '../../store';
 import { MISSIONS } from '../../data/missions';
 
@@ -6,6 +6,7 @@ export default function MissionOverlay() {
   const activeMissionId = useMissionStore((s) => s.activeMissionId);
   const currentStepIndex = useMissionStore((s) => s.currentStepIndex);
   const [rect, setRect] = useState<DOMRect | null>(null);
+  const hasScrolled = useRef(false);
 
   const mission = activeMissionId ? MISSIONS.find((m) => m.id === activeMissionId) : null;
   const step = mission ? mission.steps[currentStepIndex] : null;
@@ -15,8 +16,21 @@ export default function MissionOverlay() {
       setRect(null);
       return;
     }
+    // Hide highlight when a modal is open (user clicked the button, now filling a form)
+    if (document.querySelector('.aws-modal-overlay')) {
+      setRect(null);
+      return;
+    }
     const el = document.querySelector(step.targetSelector);
     if (el) {
+      // Scroll into view once per step if element is off-screen
+      if (!hasScrolled.current) {
+        const r = el.getBoundingClientRect();
+        if (r.top < 0 || r.bottom > window.innerHeight) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        hasScrolled.current = true;
+      }
       setRect(el.getBoundingClientRect());
     } else {
       setRect(null);
@@ -24,12 +38,16 @@ export default function MissionOverlay() {
   }, [step]);
 
   useEffect(() => {
+    hasScrolled.current = false;
+  }, [activeMissionId, currentStepIndex]);
+
+  useEffect(() => {
     if (!activeMissionId) {
       setRect(null);
       return;
     }
     // Small delay to let new page render before looking for elements
-    const initialTimer = setTimeout(updateRect, 100);
+    const initialTimer = setTimeout(updateRect, 150);
     const interval = setInterval(updateRect, 500);
     window.addEventListener('resize', updateRect);
     window.addEventListener('scroll', updateRect, true);

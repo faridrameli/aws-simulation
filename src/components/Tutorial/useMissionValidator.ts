@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
   useMissionStore,
@@ -62,7 +62,7 @@ export default function useMissionValidator() {
 
   const advancingRef = useRef(false);
 
-  function getStoreCount(storeKey: string, property: string): number {
+  const getStoreCount = useCallback((storeKey: string, property: string): number => {
     const key = `${storeKey}.${property}`;
     const map: Record<string, number> = {
       'ec2.instances': ec2Count,
@@ -88,19 +88,7 @@ export default function useMissionValidator() {
       'elasticache.clusters': ecacheCount,
     };
     return map[key] ?? 0;
-  }
-
-  // Snapshot counts when entering a storeCheck step
-  useEffect(() => {
-    if (!step || step.validation.type !== 'storeCheck') return;
-    const { storeKey, storeProperty } = step.validation;
-    if (!storeKey || !storeProperty) return;
-    const key = `${storeKey}.${storeProperty}`;
-    if (!(key in stepStartCounts)) {
-      const count = getStoreCount(storeKey, storeProperty);
-      setStepStartCounts({ ...stepStartCounts, [key]: count });
-    }
-  }, [activeMissionId, currentStepIndex]);
+  }, [ec2Count, s3Count, iamCount, vpcCount, subnetCount, lambdaCount, rdsCount, dynamoCount, cwAlarmCount, snsCount, sqsCount, route53Count, secretsCount, cfnCount, ecsCount, eksCount, apigwCount, cloudfrontCount, ebCount, cpCount, ecacheCount]);
 
   // Route-based validation
   useEffect(() => {
@@ -109,24 +97,34 @@ export default function useMissionValidator() {
     if (location.pathname === step.validation.route) {
       advancingRef.current = true;
       advanceStep();
-      setTimeout(() => { advancingRef.current = false; }, 50);
+      setTimeout(() => { advancingRef.current = false; }, 100);
     }
   }, [location.pathname, activeMissionId, currentStepIndex, step, advanceStep]);
 
-  // Store-based validation
+  // Store-based validation (combined snapshot + check)
   useEffect(() => {
     if (!step || step.validation.type !== 'storeCheck') return;
     const { storeKey, storeProperty, expectedCountIncrease } = step.validation;
-    if (!storeKey || !storeProperty) return;
-    if (advancingRef.current) return;
+    if (!storeKey || !storeProperty || !expectedCountIncrease) return;
+
     const key = `${storeKey}.${storeProperty}`;
-    const startCount = stepStartCounts[key];
-    if (startCount === undefined) return;
     const currentCount = getStoreCount(storeKey, storeProperty);
-    if (expectedCountIncrease && currentCount > startCount) {
+
+    // Always take snapshot first, regardless of advancingRef
+    if (stepStartCounts[key] === undefined) {
+      setStepStartCounts({ ...stepStartCounts, [key]: currentCount });
+      return;
+    }
+
+    // Only guard the advance with advancingRef
+    if (advancingRef.current) return;
+
+    // Validate: check if count increased since snapshot
+    const startCount = stepStartCounts[key];
+    if (currentCount > startCount) {
       advancingRef.current = true;
       advanceStep();
-      setTimeout(() => { advancingRef.current = false; }, 50);
+      setTimeout(() => { advancingRef.current = false; }, 100);
     }
-  }, [ec2Count, s3Count, iamCount, vpcCount, subnetCount, lambdaCount, rdsCount, dynamoCount, cwAlarmCount, snsCount, sqsCount, route53Count, secretsCount, cfnCount, ecsCount, eksCount, apigwCount, cloudfrontCount, ebCount, cpCount, ecacheCount, activeMissionId, currentStepIndex, stepStartCounts, step, advanceStep]);
+  }, [getStoreCount, stepStartCounts, activeMissionId, currentStepIndex, step, advanceStep, setStepStartCounts]);
 }
